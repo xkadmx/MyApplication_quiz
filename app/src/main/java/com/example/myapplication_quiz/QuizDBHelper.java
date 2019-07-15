@@ -5,6 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class QuizDBHelper extends SQLiteOpenHelper {
+    private static final String DATABASE_NAME = "MyAwesomeQuiz.db";
+    private static final int DATABASE_VERSION = 1;
+
+
+
     public QuizDBHelper(@androidx.annotation.Nullable Context context, @androidx.annotation.Nullable String name, @androidx.annotation.Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
