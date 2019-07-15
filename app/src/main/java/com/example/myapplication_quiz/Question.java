@@ -16,6 +16,8 @@ public class Question {
         this.option2 = option2;
         this.option3 = option3;
         this.answerNr = answerNr;
+
+        //these are generated constructors for the constants
     }
 
     public String getQuestion() {
