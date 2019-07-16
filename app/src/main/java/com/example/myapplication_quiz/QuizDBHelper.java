@@ -72,11 +72,11 @@ public class QuizDBHelper extends SQLiteOpenHelper {
         db.insert(QuestionsTable.TABLE_NAME, null, cv);
     }
 
-    public List<Question> getAllQuestions(){
+    public List<Question> getAllQuestions() {
         List<Question> questionList = new ArrayList<>();
         db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + QuestionsTable.TABLE_NAME, null); // we query selecting all values from TABLE_NAME
-        if (c.moveToFirst()){
+        if (c.moveToFirst()) {
             do {
                 Question question = new Question();
                 question.setQuestion(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
@@ -86,7 +86,11 @@ public class QuizDBHelper extends SQLiteOpenHelper {
                 question.setAnswerNr((c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_ANSWER_NR))));
                 questionList.add(question);
 
-            }while(c.moveToNext());
+            } while (c.moveToNext());
         }
+        c.close();
+        return questionList;
     }
 }
+
+
