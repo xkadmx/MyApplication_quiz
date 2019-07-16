@@ -2,6 +2,7 @@ package com.example.myapplication_quiz;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.example.myapplication_quiz.QuizContract.*;
@@ -72,6 +73,20 @@ public class QuizDBHelper extends SQLiteOpenHelper {
     }
 
     public List<Question> getAllQuestions(){
-        List<Question> questionList = new ArrayList<>()
+        List<Question> questionList = new ArrayList<>();
+        db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM " + QuestionsTable.TABLE_NAME, null); // we query selecting all values from TABLE_NAME
+        if (c.moveToFirst()){
+            do {
+                Question question = new Question();
+                question.setQuestion(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_QUESTION)));
+                question.setOption1(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION1)));
+                question.setOption2(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION2)));
+                question.setOption3(c.getString(c.getColumnIndex(QuestionsTable.COLUMN_OPTION3)));
+                question.setAnswerNr((c.getInt(c.getColumnIndex(QuestionsTable.COLUMN_ANSWER_NR))));
+                questionList.add(question);
+
+            }while(c.moveToNext());
+        }
     }
 }
