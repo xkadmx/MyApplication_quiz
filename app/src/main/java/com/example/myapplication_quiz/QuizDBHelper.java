@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.example.myapplication_quiz.QuizContract.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class QuizDBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "MyAwesomeQuiz.db";
     private static final int DATABASE_VERSION = 1;
@@ -48,14 +51,14 @@ public class QuizDBHelper extends SQLiteOpenHelper {
 
         Question q1 = new Question("A is correct", "A", "B", "C", 1);
         addQuestion(q1);
-        Question q2 = new Question("A is correct", "A", "B", "C", 1);
-        addQuestion(q1);
-        Question q3 = new Question("A is correct", "A", "B", "C", 1);
-        addQuestion(q1);
-        Question q4 = new Question("A is correct", "A", "B", "C", 1);
-        addQuestion(q1);
-        Question q5 = new Question("A is correct", "A", "B", "C", 1);
-        addQuestion(q1);
+        Question q2 = new Question("B is correct", "A", "B", "C", 2);
+        addQuestion(q2);
+        Question q3 = new Question("C is correct", "A", "B", "C", 3);
+        addQuestion(q3);
+        Question q4 = new Question("A is correct again", "A", "B", "C", 1);
+        addQuestion(q4);
+        Question q5 = new Question("B is correct again", "A", "B", "C", 2);
+        addQuestion(q5);
     }
 
     private void addQuestion(Question question){
@@ -66,5 +69,9 @@ public class QuizDBHelper extends SQLiteOpenHelper {
         cv.put(QuestionsTable.COLUMN_OPTION3, question.getOption3());
         cv.put(QuestionsTable.COLUMN_ANSWER_NR, question.getAnswerNr());
         db.insert(QuestionsTable.TABLE_NAME, null, cv);
+    }
+
+    public List<Question> getAllQuestions(){
+        List<Question> questionList = new ArrayList<>()
     }
 }
