@@ -3,12 +3,12 @@ package com.example.myapplication_quiz;
 import android.provider.BaseColumns;
 
 
-public final class QuizContract implements BaseColumns {  //container for different constants
+public final class QuizContract  {  //container for different constants
 
     private QuizContract(){}//this way we cannot create a new object of this class
 
 
-    public static class QuestionsTable{
+    public static class QuestionsTable implements BaseColumns{
         public static final String TABLE_NAME = "quiz_questions";
         public static final String COLUMN_QUESTION = "question";
         public static final String COLUMN_OPTION1 = "option1";
