@@ -1,5 +1,6 @@
 package com.example.myapplication_quiz;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -46,6 +47,24 @@ public class QuizDBHelper extends SQLiteOpenHelper {
     private void fillQuestionsTable(){
 
         Question q1 = new Question("A is correct", "A", "B", "C", 1);
+        addQuestion(q1);
+        Question q2 = new Question("A is correct", "A", "B", "C", 1);
+        addQuestion(q1);
+        Question q3 = new Question("A is correct", "A", "B", "C", 1);
+        addQuestion(q1);
+        Question q4 = new Question("A is correct", "A", "B", "C", 1);
+        addQuestion(q1);
+        Question q5 = new Question("A is correct", "A", "B", "C", 1);
+        addQuestion(q1);
+    }
 
+    private void addQuestion(Question question){
+        ContentValues cv = new ContentValues();
+        cv.put(QuestionsTable.COLUMN_QUESTION, question.getQuestion());
+        cv.put(QuestionsTable.COLUMN_OPTION1, question.getOption1());
+        cv.put(QuestionsTable.COLUMN_OPTION2, question.getOption2());
+        cv.put(QuestionsTable.COLUMN_OPTION3, question.getOption3());
+        cv.put(QuestionsTable.COLUMN_ANSWER_NR, question.getAnswerNr());
+        db.insert(QuestionsTable.TABLE_NAME, null, cv);
     }
 }
