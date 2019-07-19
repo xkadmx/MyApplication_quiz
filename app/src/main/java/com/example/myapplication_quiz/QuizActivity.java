@@ -1,5 +1,6 @@
 package com.example.myapplication_quiz;
 
+import android.content.res.ColorStateList;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -20,6 +21,8 @@ public class QuizActivity extends AppCompatActivity {
     private RadioButton rb3;
     private Button buttonConfirmNext;
 
+    private ColorStateList textColorDefaultRb;
+
     private List<Question> questionList;
 
     @Override
@@ -37,6 +40,7 @@ public class QuizActivity extends AppCompatActivity {
         rb2 = findViewById(R.id.radio_button2);
         rb3 = findViewById(R.id.radio_button3);
         buttonConfirmNext = findViewById(R.id.button_confirm_next);
+
 
         QuizDBHelper dbHelper = new QuizDBHelper(this);  // initialising new object of QuizDBHelper class
         questionList = dbHelper.getAllQuestions();
