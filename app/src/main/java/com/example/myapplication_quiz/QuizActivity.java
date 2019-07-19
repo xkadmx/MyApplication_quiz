@@ -38,7 +38,7 @@ public class QuizActivity extends AppCompatActivity {
         rb3 = findViewById(R.id.radio_button3);
         buttonConfirmNext = findViewById(R.id.button_confirm_next);
 
-        QuizDBHelper dbHelper = new QuizDBHelper(this);
+        QuizDBHelper dbHelper = new QuizDBHelper(this);  // initialising new object of QuizDBHelper class
         questionList = dbHelper.getAllQuestions();
 
 
