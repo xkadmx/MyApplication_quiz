@@ -56,6 +56,35 @@ public class QuizActivity extends AppCompatActivity {
         questionCountTotal = questionList.size();
         Collections.shuffle(questionList);
 
+        showNextQuestion();
 
+
+    }
+    private void showNextQuestion(){
+        rb1.setTextColor(textColorDefaultRb);
+        rb2.setTextColor(textColorDefaultRb);
+        rb3.setTextColor(textColorDefaultRb);
+        rbGroup.clearCheck();
+
+        if(questionCounter < questionCountTotal) {
+            currentQuestion = questionList.get(questionCounter);
+
+            textViewQuestion.setText(currentQuestion.getQuestion());
+            rb1.setText(currentQuestion.getOption1());
+            rb2.setText(currentQuestion.getOption2());
+            rb3.setText(currentQuestion.getOption3());
+
+            questionCounter++;
+            textViewQuestionCount.setText("Question: " + questionCounter + "/" + questionCountTotal);
+            answered = false;
+            buttonConfirmNext.setText("Confirm");
+        }else{
+            finishQuiz();
+
+        }
+    }
+
+    private void finishQuiz(){
+        finish();
     }
 }
