@@ -8,6 +8,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.Collections;
 import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
@@ -24,6 +25,12 @@ public class QuizActivity extends AppCompatActivity {
     private ColorStateList textColorDefaultRb;
 
     private List<Question> questionList;
+    private int questionCounter;
+    private int questionCountTotal;
+    private Question currentQuestion;
+
+    private int score;
+    private boolean answered;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +48,13 @@ public class QuizActivity extends AppCompatActivity {
         rb3 = findViewById(R.id.radio_button3);
         buttonConfirmNext = findViewById(R.id.button_confirm_next);
 
+        textColorDefaultRb = rb1.getTextColors();
+
 
         QuizDBHelper dbHelper = new QuizDBHelper(this);  // initialising new object of QuizDBHelper class
         questionList = dbHelper.getAllQuestions();
+        questionCountTotal = questionList.size();
+        Collections.shuffle(questionList);
 
 
     }
