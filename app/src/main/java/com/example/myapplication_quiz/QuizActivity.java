@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +66,12 @@ public class QuizActivity extends AppCompatActivity {
                 if(!answered){
                     if(rb1.isChecked()|| rb2.isChecked() || rb3.isChecked()){
                         checkAnswer();
+                    }else{
+                        Toast.makeText(QuizActivity.this, "Please, select an answer", Toast.LENGTH_SHORT).show();
                     }
+
+                }else{
+                    showNextQuestion();
                 }
             }
         });
@@ -93,6 +99,18 @@ public class QuizActivity extends AppCompatActivity {
         }else{
             finishQuiz();
 
+        }
+    }
+
+    private void checkAnswer(){
+        answered = true;
+
+
+        RadioButton rbSelected = findViewById(rbGroup.getCheckedRadioButtonId());
+        int answerNr = rbGroup.indexOfChild(rbSelected) +1;
+
+        if(answerNr == currentQuestion.getAnswerNr() ){
+            score++;
         }
     }
 
