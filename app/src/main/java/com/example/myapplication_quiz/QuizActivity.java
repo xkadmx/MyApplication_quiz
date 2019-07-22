@@ -138,6 +138,11 @@ public class QuizActivity extends AppCompatActivity {
                 textViewQuestion.setText("Answer 3 is correct");
                 break;
         }
+        if (questionCounter < questionCountTotal){
+            buttonConfirmNext.setText("Next");
+        }else{
+            buttonConfirmNext.setText("Finish");
+        }
     }
 
     private void finishQuiz() {
