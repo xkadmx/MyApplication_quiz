@@ -3,6 +3,7 @@ package com.example.myapplication_quiz;
 import android.content.res.ColorStateList;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -58,9 +59,20 @@ public class QuizActivity extends AppCompatActivity {
 
         showNextQuestion();
 
+        buttonConfirmNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!answered){
+                    if(rb1.isChecked()|| rb2.isChecked() || rb3.isChecked()){
+                        checkAnswer();
+                    }
+                }
+            }
+        });
+
 
     }
-    private void showNextQuestion(){
+    private void showNextQuestion(){  // INTENSE
         rb1.setTextColor(textColorDefaultRb);
         rb2.setTextColor(textColorDefaultRb);
         rb3.setTextColor(textColorDefaultRb);
