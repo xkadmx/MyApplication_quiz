@@ -14,6 +14,8 @@ import android.widget.Toast;
 import java.util.Collections;
 import java.util.List;
 
+import static android.graphics.Color.GREEN;
+
 public class QuizActivity extends AppCompatActivity {
     private TextView textViewQuestion;
     private TextView textViewScore;
@@ -64,14 +66,14 @@ public class QuizActivity extends AppCompatActivity {
         buttonConfirmNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!answered){
-                    if(rb1.isChecked()|| rb2.isChecked() || rb3.isChecked()){
+                if (!answered) {
+                    if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked()) {
                         checkAnswer();
-                    }else{
+                    } else {
                         Toast.makeText(QuizActivity.this, "Please, select an answer", Toast.LENGTH_SHORT).show();
                     }
 
-                }else{
+                } else {
                     showNextQuestion();
                 }
             }
@@ -79,13 +81,14 @@ public class QuizActivity extends AppCompatActivity {
 
 
     }
-    private void showNextQuestion(){  // INTENSE
+
+    private void showNextQuestion() {  // INTENSE
         rb1.setTextColor(textColorDefaultRb);
         rb2.setTextColor(textColorDefaultRb);
         rb3.setTextColor(textColorDefaultRb);
         rbGroup.clearCheck();
 
-        if(questionCounter < questionCountTotal) {
+        if (questionCounter < questionCountTotal) {
             currentQuestion = questionList.get(questionCounter);
 
             textViewQuestion.setText(currentQuestion.getQuestion());
@@ -97,33 +100,48 @@ public class QuizActivity extends AppCompatActivity {
             textViewQuestionCount.setText("Question: " + questionCounter + "/" + questionCountTotal);
             answered = false;
             buttonConfirmNext.setText("Confirm");
-        }else{
+        } else {
             finishQuiz();
 
         }
     }
 
-    private void checkAnswer(){
+    private void checkAnswer() {
         answered = true;
 
 
         RadioButton rbSelected = findViewById(rbGroup.getCheckedRadioButtonId());
-        int answerNr = rbGroup.indexOfChild(rbSelected) +1;
+        int answerNr = rbGroup.indexOfChild(rbSelected) + 1;
 
-        if(answerNr == currentQuestion.getAnswerNr() ){
+        if (answerNr == currentQuestion.getAnswerNr()) {
             score++;
             textViewScore.setText("Score: " + score);
         }
         showSolution();
     }
 
-    private void showSolution(){
+    private void showSolution() {
         rb1.setTextColor(Color.RED);
         rb2.setTextColor(Color.RED);
         rb3.setTextColor(Color.RED);
+
+        switch (currentQuestion.getAnswerNr()) {
+            case 1:
+                rb1.setTextColor(Color.GREEN);
+                textViewQuestion.setText("Answer 1 is correct");
+                break;
+            case 2:
+                rb1.setTextColor(Color.GREEN);
+                textViewQuestion.setText("Answer 2 is correct");
+                break;
+            case 3:
+                rb1.setTextColor(Color.GREEN);
+                textViewQuestion.setText("Answer 3 is correct");
+                break;
+        }
     }
 
-    private void finishQuiz(){
+    private void finishQuiz() {
         finish();
     }
 }
