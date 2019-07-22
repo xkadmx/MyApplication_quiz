@@ -14,7 +14,6 @@ import android.widget.Toast;
 import java.util.Collections;
 import java.util.List;
 
-import static android.graphics.Color.GREEN;
 
 public class QuizActivity extends AppCompatActivity {
     private TextView textViewQuestion;
@@ -131,11 +130,11 @@ public class QuizActivity extends AppCompatActivity {
                 textViewQuestion.setText("Answer 1 is correct");
                 break;
             case 2:
-                rb1.setTextColor(Color.GREEN);
+                rb2.setTextColor(Color.GREEN);
                 textViewQuestion.setText("Answer 2 is correct");
                 break;
             case 3:
-                rb1.setTextColor(Color.GREEN);
+                rb3.setTextColor(Color.GREEN);
                 textViewQuestion.setText("Answer 3 is correct");
                 break;
         }
