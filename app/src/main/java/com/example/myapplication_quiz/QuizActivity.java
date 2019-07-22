@@ -1,6 +1,7 @@
 package com.example.myapplication_quiz;
 
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -111,7 +112,15 @@ public class QuizActivity extends AppCompatActivity {
 
         if(answerNr == currentQuestion.getAnswerNr() ){
             score++;
+            textViewScore.setText("Score: " + score);
         }
+        showSolution();
+    }
+
+    private void showSolution(){
+        rb1.setTextColor(Color.RED);
+        rb2.setTextColor(Color.RED);
+        rb3.setTextColor(Color.RED);
     }
 
     private void finishQuiz(){
