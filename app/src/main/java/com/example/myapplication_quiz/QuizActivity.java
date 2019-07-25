@@ -17,7 +17,7 @@ import java.util.List;
 
 
 public class QuizActivity extends AppCompatActivity {
-    public static final String EXTRA_SCORE = "extraScore";
+    public static final String EXTRA_SCORE = "extraScore"; // String used in SharedPreferences
 
 
     private TextView textViewQuestion;
