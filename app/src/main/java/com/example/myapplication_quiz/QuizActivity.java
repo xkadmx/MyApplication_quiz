@@ -142,9 +142,9 @@ public class QuizActivity extends AppCompatActivity {
                 textViewQuestion.setText("Answer 3 is correct");
                 break;
         }
-        if (questionCounter < questionCountTotal){
+        if (questionCounter < questionCountTotal) {
             buttonConfirmNext.setText("Next");
-        }else{
+        } else {
             buttonConfirmNext.setText("Finish");
         }
     }
@@ -152,6 +152,7 @@ public class QuizActivity extends AppCompatActivity {
     private void finishQuiz() {
         Intent resultIntent = new Intent();
         resultIntent.putExtra(EXTRA_SCORE, score);
+        setResult(RESULT_OK, resultIntent); // if thee score is available we put it inside resultIntent variable and pass it into MainActivity.java
 
         finish();
     }
