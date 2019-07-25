@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {  // StartinQuizActivity
+    private static final int REQUEST_CODE_QUIZ = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,6 @@ public class MainActivity extends AppCompatActivity {
     }
     private void startQuiz(){
         Intent intent = new Intent(MainActivity.this, QuizActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE_QUIZ); // we change the methot to get the score displayed
     }
 }
