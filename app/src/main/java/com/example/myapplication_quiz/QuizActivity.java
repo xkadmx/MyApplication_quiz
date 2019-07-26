@@ -122,7 +122,8 @@ public class QuizActivity extends AppCompatActivity {
 
         }
     }
-    private void startCountDown(){
+
+    private void startCountDown() {
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -141,16 +142,16 @@ public class QuizActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void updateCountDownText(){
-        int minutes = (int)(timeLeftInMillis / 1000) / 60;
+    private void updateCountDownText() {
+        int minutes = (int) (timeLeftInMillis / 1000) / 60;
         int seconds = (int) (timeLeftInMillis / 1000) % 60; // to get what is left after / by 60
 
         String timeFormatted = String.format(Locale.getDefault(), "% 02d:%02d", minutes, seconds);
         textViewCountDown.setText(timeFormatted);
 
-        if (timeLeftInMillis < 10000){
+        if (timeLeftInMillis < 10000) {
             textViewCountDown.setTextColor(Color.RED);
-        }else{
+        } else {
             textViewCountDown.setTextColor(textColorDefaultCd);
         }
     }
@@ -206,9 +207,9 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(backPressedTime + 2000 > System.currentTimeMillis() ){
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
             finishQuiz();
-        } else{
+        } else {
             Toast.makeText(this, "Press back again to finish", Toast.LENGTH_SHORT).show();
         }
         backPressedTime = System.currentTimeMillis();
@@ -217,7 +218,7 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(countDownTimer != null){
+        if (countDownTimer != null) {
             countDownTimer.cancel();
         }
     }
