@@ -18,6 +18,7 @@ import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
     public static final String EXTRA_SCORE = "extraScore"; // String used in SharedPreferences
+    public static final long COUNTDOWN_IN_MILLIS = 30000; // timer countdown counter
 
 
     private TextView textViewQuestion;
@@ -31,6 +32,8 @@ public class QuizActivity extends AppCompatActivity {
     private Button buttonConfirmNext;
 
     private ColorStateList textColorDefaultRb;
+    private ColorStateList textColorDefaultCd;  // color for the counter
+
 
     private List<Question> questionList;
     private int questionCounter;
