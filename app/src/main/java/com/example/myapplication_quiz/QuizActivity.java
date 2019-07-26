@@ -3,6 +3,7 @@ package com.example.myapplication_quiz;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +35,10 @@ public class QuizActivity extends AppCompatActivity {
     private ColorStateList textColorDefaultRb;
     private ColorStateList textColorDefaultCd;  // color for the counter
 
+    private CountDownTimer countDownTimer;
+
+    private long timeLeftInMillis;
+
 
     private List<Question> questionList;
     private int questionCounter;
@@ -61,6 +66,7 @@ public class QuizActivity extends AppCompatActivity {
         buttonConfirmNext = findViewById(R.id.button_confirm_next);
 
         textColorDefaultRb = rb1.getTextColors();
+        textColorDefaultCd = textViewCountDown.getTextColors();
 
 
         QuizDBHelper dbHelper = new QuizDBHelper(this);  // initialising new object of QuizDBHelper class
@@ -107,9 +113,25 @@ public class QuizActivity extends AppCompatActivity {
             textViewQuestionCount.setText("Question: " + questionCounter + "/" + questionCountTotal);
             answered = false;
             buttonConfirmNext.setText("Confirm");
+
+            timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+            startCountDown();
         } else {
             finishQuiz();
 
+        }
+    }
+    private void startCountDown(){
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
         }
     }
 
