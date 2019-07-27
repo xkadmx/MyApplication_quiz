@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -21,6 +23,15 @@ import java.util.Locale;
 public class QuizActivity extends AppCompatActivity {
     public static final String EXTRA_SCORE = "extraScore"; // String used in SharedPreferences
     public static final long COUNTDOWN_IN_MILLIS = 30000; // timer countdown counter
+
+
+    // constants are used to store values we do not want to lose when configuration changes
+    private static final String KEY_SCORE = "keyScore";
+    private static final String KEY_QUESTION_COUNT = "keyQuestionCount";
+    private static final String KEY_MILLIS_LEFT = "keyMillisLeft";
+    private static final String KEY_ANSWERED = "keyAnswered";
+    private static final String KEY_QUESTION_LIST = "keyQuestionList";
+
 
 
     private TextView textViewQuestion;
@@ -41,7 +52,7 @@ public class QuizActivity extends AppCompatActivity {
     private long timeLeftInMillis;
 
 
-    private List<Question> questionList;
+    private ArrayList<Question> questionList;
     private int questionCounter;
     private int questionCountTotal;
     private Question currentQuestion;
@@ -70,12 +81,24 @@ public class QuizActivity extends AppCompatActivity {
         textColorDefaultCd = textViewCountDown.getTextColors();
 
 
-        QuizDBHelper dbHelper = new QuizDBHelper(this);  // initialising new object of QuizDBHelper class
-        questionList = dbHelper.getAllQuestions();
-        questionCountTotal = questionList.size();
-        Collections.shuffle(questionList);
+        if (savedInstanceState == null) {  // savedInstanceState is equal to null when the activity is interrupted in other ways than normal; because normal quit procedure was described already in methods
 
-        showNextQuestion();
+
+            QuizDBHelper dbHelper = new QuizDBHelper(this);  // initialising new object of QuizDBHelper class
+            questionList = dbHelper.getAllQuestions();
+            questionCountTotal = questionList.size();
+            Collections.shuffle(questionList);
+
+            showNextQuestion();
+        }else{ // retrieving variables after instant state is changed
+            questionList = savedInstanceState.getParcelableArrayList(KEY_QUESTION_LIST);
+            questionCountTotal = questionList.size(); // getting number of all questions on the list
+            questionCounter = savedInstanceState.getInt(KEY_QUESTION_COUNT);
+            currentQuestion = questionList.get(questionCounter -1);
+            score = savedInstanceState.getInt(KEY_SCORE);
+            timeLeftInMillis = savedInstanceState.getLong(KEY_MILLIS_LEFT);
+            answered = savedInstanceState.getBoolean(KEY_ANSWERED);
+        }
 
         buttonConfirmNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -222,4 +245,14 @@ public class QuizActivity extends AppCompatActivity {
             countDownTimer.cancel();
         }
     }
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putInt(KEY_SCORE, score);
+        outState.putInt(KEY_QUESTION_COUNT, questionCounter);
+        outState.putLong(KEY_MILLIS_LEFT, timeLeftInMillis);
+        outState.putBoolean(KEY_ANSWERED, answered);
+        outState.putParcelableArrayList(KEY_QUESTION_LIST, questionList);
+    }
+
 }
