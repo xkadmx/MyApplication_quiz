@@ -4,6 +4,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Question implements Parcelable { // makes it possible to send Question objects between other classes or saved instant states
+    public static final String DIFFICULTY_EASY = "Easy";
+    public static final String DIFFICULTY_MEDIUM = "Medium";
+    public static final String DIFFICULTY_HARD = "Hard";
+
+
+
     private String question;
     private String option1;
     private String option2;
@@ -11,7 +17,7 @@ public class Question implements Parcelable { // makes it possible to send Quest
 
     private int answerNr;
 
-    public Question(){}
+    public Question(){}   //Question is an object
 
     public Question(String question, String option1, String option2, String option3, int answerNr) {
         this.question = question;
