@@ -107,4 +107,12 @@ public class Question implements Parcelable { // makes it possible to send Quest
     public void setAnswerNr(int answerNr) {
         this.answerNr = answerNr;
     }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
 }
