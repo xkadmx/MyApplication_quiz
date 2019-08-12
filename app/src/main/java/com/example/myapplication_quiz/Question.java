@@ -38,6 +38,7 @@ public class Question implements Parcelable { // makes it possible to send Quest
         option2 = in.readString();
         option3 = in.readString();
         answerNr = in.readInt();
+        difficulty = in.readString();
     }
 
     @Override
@@ -47,6 +48,7 @@ public class Question implements Parcelable { // makes it possible to send Quest
         dest.writeString(option2);
         dest.writeString(option3);
         dest.writeInt(answerNr);
+        dest.writeString(difficulty);
     }
 
     @Override
