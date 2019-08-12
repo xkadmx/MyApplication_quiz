@@ -3,7 +3,7 @@ package com.example.myapplication_quiz;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Question implements Parcelable {
+public class Question implements Parcelable { // makes it possible to send Question objects between other classes or saved instant states
     private String question;
     private String option1;
     private String option2;
